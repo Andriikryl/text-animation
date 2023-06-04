@@ -42,12 +42,10 @@ const projects = [
   },
 ];
 
-//https://anacuna.com/
-
 export default function Home() {
   const manageMouseEnter = (e, index) => {
     gsap.to(e.target, {
-      top: "-2vw",
+      top: "-3vw",
       backgroundColor: projects[index].color,
       duration: 0.3,
     });
