@@ -1,63 +1,86 @@
+"use client";
+
 import styles from "./page.module.css";
+import gsap from "gsap";
 
 const projects = [
   {
     title: "New York",
     color: "#F06318",
-    id: 1,
   },
   {
     title: "San Francisco",
     color: "#DCF018",
-    id: 2,
   },
   {
     title: "San Antonio",
     color: "#18F0E8",
-    id: 3,
   },
   {
     title: "Nashville",
     color: "#8C0CF0",
-    id: 4,
   },
   {
     title: "Houston",
     color: "#F0183C",
-    id: 5,
   },
   {
     title: "New Orleans",
     color: "#F0BA18",
-    id: 6,
   },
   {
     title: "Oklahoma City",
     color: "#0C34F0",
-    id: 7,
   },
   {
     title: "Detroit",
     color: "#0CBCF0",
-    id: 8,
   },
   {
     title: "Indianapolis",
     color: "#91F018",
-    id: 9,
   },
 ];
 
+//https://anacuna.com/
+
 export default function Home() {
+  const manageMouseEnter = (e, index) => {
+    gsap.to(e.target, {
+      top: "-2vw",
+      backgroundColor: projects[index].color,
+      duration: 0.3,
+    });
+  };
+
+  const manageMouseLeave = (e, index) => {
+    gsap.to(e.target, {
+      top: "0",
+      backgroundColor: "white",
+      duration: 0.3,
+      delay: 0.1,
+    });
+  };
+
   return (
-    <main className={styles.main}>
-      {projects.map((project, index) => {
-        return (
-          <div key={project.id}>
-            <p>{project.title}</p>
-          </div>
-        );
-      })}
-    </main>
+    <div className={styles.container}>
+      <div className={styles.projectContainer}>
+        {projects.map((project, index) => {
+          return (
+            <div
+              onMouseEnter={(e) => {
+                manageMouseEnter(e, index);
+              }}
+              onMouseLeave={(e) => {
+                manageMouseLeave(e, index);
+              }}
+              key={index}
+            >
+              <p>{project.title}</p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
